@@ -1,0 +1,100 @@
+<style>
+  * {
+  font-family: 'DejaVu Sans Mono', sans-serif;
+  font-weight:1000;
+  font-size:95%;
+  background-color:#363636;
+  accent-color:#9E9E9E;
+}
+
+section{
+  display: flex;
+  flex-flow:row;
+  justify-content:center;
+  align-items:strecth;
+  color:#9E9E9E
+}
+
+input {
+  border:0px solid black;
+  border-radius:3px;
+  color:#3B3B3B;
+  font-weight:bold;
+  text-align:center;
+  background-color:#9E9E9E;
+  padding:5px 0px
+}
+output{
+  font-weight:bold;
+  color:#9E9E9E;
+}
+
+container{
+  text-align:center;
+  content-color:grey;
+  padding:15px;
+}
+
+p{
+  text-align: center;
+}
+</style>
+
+<script>
+  function calculate() {
+  
+  var PhysicalHeight = 2 * Number(document.getElementById('Chh').value) +
+                       Number(document.getElementById('RideH').value) / 100 * 
+                       Number(document.getElementById('CastL').value);
+
+  var EyeHeight = Number(document.getElementById('Chh').value) +
+                  Number(document.getElementById('RideH').value) / 100 * 
+                  Number(document.getElementById('CastL').value) + 
+                  Number(document.getElementById('CamZ').value);
+  document.getElementById('output1').value = PhysicalHeight;
+  document.getElementById('output2').value = EyeHeight;
+}
+
+function slideValue(){
+  document.getElementById('sld').value = Number(document.getElementById('RideH').value / 100)
+}
+
+window.onload = calculate;
+</script>
+
+<section>
+  
+  <container>
+    <p>Capsule Half Height </p>
+    <input id="Chh" type="number" value="85" oninput="calculate()">
+  </container>
+  
+  <container>
+    <p>Camera Z Position</p>
+    <input id="CamZ" type="number" value="67" oninput="calculate()">
+  </container>
+  
+  <container>
+    <p>FloorCast Lenght</p>
+    <input id="CastL" type="number" value="60" oninput="calculate()">
+  </container>
+  
+  <container>
+    <p>Ride Height</p>
+    <input type="range" id="RideH" value="50" min="0" max="100" step="5" oninput="calculate(); slideValue()"><br>
+  <output id="sld">0.5</output>
+  </container>
+</section>
+
+<section>
+  <container>
+    <p>Physical Height </p>
+    <input id="output1" readonly>
+  </container>
+  
+  <container>
+    <p>Eye Height</p>
+    <input id="output2" readonly>
+  </container>
+  
+</section>
